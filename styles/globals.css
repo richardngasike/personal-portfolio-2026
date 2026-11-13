@@ -124,7 +124,7 @@ dd {
 }
 
 [data-theme='dark'] body {
-  background: #0e1114;
+  background: #0c0f12;
 }
 
 @media (prefers-reduced-motion: reduce) {

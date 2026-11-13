@@ -5,25 +5,26 @@ import { PageHeader } from '@/components/shared/PageHeader';
 import { ContactCta } from '@/components/shared/ContactCta';
 import { GalleryBrowser } from '@/components/gallery/GalleryBrowser';
 import { pageMetadata } from '@/lib/seo';
-import { getGallery, getHomepage } from '@/lib/queries/public';
+import { getGallery } from '@/lib/queries/public';
 
 export const revalidate = 300;
 
 export const metadata: Metadata = pageMetadata({
-  title: 'Creative Work',
+  title: 'Creative work: brand identity, publication and graphic design',
   description:
     'Graphic design by Richard Ngasike: brand identity, logos, publications, posters, infographics, data visualisation and presentation design.',
   path: '/creative-work',
 });
 
 export default async function CreativeWorkPage() {
-  const [{ categories, items }, home] = await Promise.all([getGallery(), getHomepage()]);
+  const { categories, items } = await getGallery();
 
   return (
     <>
       <PageHeader
+        path="/creative-work"
         eyebrow="Creative work"
-        title="Creative Work"
+        title="Visual communication, design and brand identity."
         lead="Visual communication, design and brand identity. Select any piece to view it at full size."
       />
 
@@ -40,7 +41,7 @@ export default async function CreativeWorkPage() {
         </div>
       </section>
 
-      <ContactCta heading={home.contact_heading || 'Get in touch'} text={home.contact_invitation} />
+      <ContactCta />
     </>
   );
 }

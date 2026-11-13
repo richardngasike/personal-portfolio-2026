@@ -3,18 +3,19 @@
 .display {
   font-family: var(--font-display);
   font-size: var(--text-3xl);
-  font-weight: 500;
-  line-height: 1.06;
-  letter-spacing: -0.02em;
+  font-weight: 450;
+  line-height: 1.02;
+  letter-spacing: -0.028em;
   text-wrap: balance;
+  font-optical-sizing: auto;
 }
 
 .heading-1 {
   font-family: var(--font-display);
   font-size: var(--text-2xl);
-  font-weight: 500;
-  line-height: 1.12;
-  letter-spacing: -0.015em;
+  font-weight: 450;
+  line-height: 1.06;
+  letter-spacing: -0.022em;
   text-wrap: balance;
 }
 

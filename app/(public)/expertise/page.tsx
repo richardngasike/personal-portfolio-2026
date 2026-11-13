@@ -5,12 +5,12 @@ import '@/styles/pages/expertise.css';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { ContactCta } from '@/components/shared/ContactCta';
 import { pageMetadata } from '@/lib/seo';
-import { getHomepage, getSkillGroups } from '@/lib/queries/public';
+import { getSkillGroups } from '@/lib/queries/public';
 
 export const revalidate = 300;
 
 export const metadata: Metadata = pageMetadata({
-  title: 'Technical Expertise',
+  title: 'Technical expertise: frontend, mobile, backend, cloud and design',
   description:
     'The languages, frameworks, platforms and design tools Richard Ngasike works with, grouped by engineering discipline.',
   path: '/expertise',
@@ -29,13 +29,14 @@ function categoryIcon(name: string): IconType {
 }
 
 export default async function ExpertisePage() {
-  const [groups, home] = await Promise.all([getSkillGroups(), getHomepage()]);
+  const groups = await getSkillGroups();
 
   return (
     <>
       <PageHeader
+        path="/expertise"
         eyebrow="Technical expertise"
-        title="Technical Expertise"
+        title="A multidisciplinary skill set."
         lead="The tools and practices I use, grouped by discipline."
       />
 
@@ -69,7 +70,7 @@ export default async function ExpertisePage() {
         </div>
       </section>
 
-      <ContactCta heading={home.contact_heading || 'Get in touch'} text={home.contact_invitation} />
+      <ContactCta />
     </>
   );
 }

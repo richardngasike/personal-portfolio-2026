@@ -5,7 +5,7 @@ import { PageHeader } from '@/components/shared/PageHeader';
 import { ContactCta } from '@/components/shared/ContactCta';
 import { pageMetadata } from '@/lib/seo';
 import { paragraphs } from '@/lib/utils/format';
-import { getHomepage, getProfile } from '@/lib/queries/public';
+import { getProfile } from '@/lib/queries/public';
 import { assetUrl } from '@/lib/storage';
 
 export const revalidate = 300;
@@ -13,21 +13,23 @@ export const revalidate = 300;
 export async function generateMetadata(): Promise<Metadata> {
   const profile = await getProfile();
   return pageMetadata({
-    title: 'About',
+    title: `About ${profile.full_name}`,
     description: profile.short_intro || `About ${profile.full_name}.`,
     path: '/about',
+    type: 'profile',
   });
 }
 
 export default async function AboutPage() {
-  const [profile, home] = await Promise.all([getProfile(), getHomepage()]);
+  const profile = await getProfile();
   const photoUrl = assetUrl('profile-images', profile.photo_path);
   const biography = paragraphs(profile.biography);
   const philosophy = paragraphs(profile.philosophy);
 
   return (
     <>
-      <PageHeader eyebrow="About me" title={profile.headline || profile.full_name} lead={profile.short_intro} />
+      <PageHeader
+        path="/about" eyebrow="About me" title={profile.headline || profile.full_name} lead={profile.short_intro} />
 
       <section className="section section--white" aria-labelledby="biography-heading">
         <div className="container about">
@@ -120,7 +122,7 @@ export default async function AboutPage() {
         </section>
       ) : null}
 
-      <ContactCta heading={home.contact_heading || 'Get in touch'} text={home.contact_invitation} />
+      <ContactCta />
     </>
   );
 }

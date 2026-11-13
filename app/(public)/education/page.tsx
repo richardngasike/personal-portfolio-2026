@@ -4,7 +4,7 @@ import { PageHeader } from '@/components/shared/PageHeader';
 import { ContactCta } from '@/components/shared/ContactCta';
 import { pageMetadata } from '@/lib/seo';
 import { formatDateRange } from '@/lib/utils/format';
-import { getEducation, getHomepage } from '@/lib/queries/public';
+import { getEducation } from '@/lib/queries/public';
 
 export const revalidate = 300;
 
@@ -15,15 +15,16 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default async function EducationPage() {
-  const [records, home] = await Promise.all([getEducation(), getHomepage()]);
+  const records = await getEducation();
   const formal = records.filter((record) => record.kind === 'formal');
   const learning = records.filter((record) => record.kind === 'professional_learning');
 
   return (
     <>
       <PageHeader
+        path="/education"
         eyebrow="Education and interests"
-        title="Education and Professional Development"
+        title="Learning, growth and areas of focus."
         lead="My formal qualification, and the areas I am studying on my own."
       />
 
@@ -116,7 +117,7 @@ export default async function EducationPage() {
         </section>
       ) : null}
 
-      <ContactCta heading={home.contact_heading || 'Get in touch'} text={home.contact_invitation} />
+      <ContactCta />
     </>
   );
 }

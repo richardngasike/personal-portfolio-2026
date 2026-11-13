@@ -10,7 +10,7 @@ import { getHomepage, getProfile } from '@/lib/queries/public';
 export const revalidate = 300;
 
 export const metadata: Metadata = pageMetadata({
-  title: 'Contact',
+  title: 'Contact Richard Ngasike',
   description: 'Contact Richard Ngasike about web development, mobile development, backend work or design.',
   path: '/contact',
 });
@@ -25,6 +25,7 @@ export default async function ContactPage() {
   return (
     <>
       <PageHeader
+        path="/contact"
         eyebrow="Get in touch"
         title={home.contact_heading || 'Get in touch'}
         lead={home.contact_invitation || undefined}

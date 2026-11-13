@@ -13,12 +13,12 @@ insert into public.website_settings
 values (
   true,
   'Richard Ngasike',
-  'Richard Ngasike is a software engineer and designer based in Nairobi, Kenya, building web and mobile applications and designing publications and brand identities.',
+  'Richard Ngasike is a software engineer and designer in Nairobi, Kenya. He builds web and mobile applications with Next.js, Flutter and Django, and designs publications and brand identities.',
   'Richard Ngasike',
   'Software engineering, mobile development and design from Nairobi, Kenya.',
   'Richard Ngasike',
   2025,
-  array['Richard Ngasike', 'software engineer Nairobi', 'Flutter developer Kenya', 'Next.js developer', 'graphic designer Nairobi']
+  array['Richard Ngasike', 'software engineer Nairobi', 'full-stack developer Kenya', 'Flutter developer Kenya', 'Next.js developer Nairobi', 'Django developer Kenya', 'graphic designer Nairobi', 'mobile app developer Kenya']
 )
 on conflict (id) do nothing;
 

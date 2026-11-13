@@ -4,26 +4,28 @@ import '@/styles/pages/projects.css';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { ContactCta } from '@/components/shared/ContactCta';
 import { ProjectBrowser } from '@/components/projects/ProjectBrowser';
-import { pageMetadata } from '@/lib/seo';
-import { getHomepage, getProjectCategories, getProjects } from '@/lib/queries/public';
+import { JsonLd } from '@/components/shared/JsonLd';
+import { absoluteUrl, pageMetadata } from '@/lib/seo';
+import { getProjectCategories, getProjects } from '@/lib/queries/public';
 
 export const revalidate = 300;
 
 export const metadata: Metadata = pageMetadata({
-  title: 'Projects',
+  title: 'Projects: web, mobile and data applications',
   description:
     'Software projects by Richard Ngasike: web applications, mobile applications, backend systems and data tools, each with a case study.',
   path: '/projects',
 });
 
 export default async function ProjectsPage() {
-  const [projects, categories, home] = await Promise.all([getProjects(), getProjectCategories(), getHomepage()]);
+  const [projects, categories] = await Promise.all([getProjects(), getProjectCategories()]);
 
   return (
     <>
       <PageHeader
+        path="/projects"
         eyebrow="Projects"
-        title="My Projects"
+        title="Software projects that solve real problems."
         lead="Web, mobile, backend and data projects. Each one links to a case study covering the problem, the build and the stack."
       />
 
@@ -40,7 +42,22 @@ export default async function ProjectsPage() {
         </div>
       </section>
 
-      <ContactCta heading={home.contact_heading || 'Get in touch'} text={home.contact_invitation} />
+      <ContactCta />
+      {projects.length > 0 ? (
+        <JsonLd
+          data={{
+            '@context': 'https://schema.org',
+            '@type': 'ItemList',
+            name: 'Projects by Richard Ngasike',
+            itemListElement: projects.map((project, index) => ({
+              '@type': 'ListItem',
+              position: index + 1,
+              name: project.title,
+              url: absoluteUrl(`/projects/${project.slug}`),
+            })),
+          }}
+        />
+      ) : null}
     </>
   );
 }

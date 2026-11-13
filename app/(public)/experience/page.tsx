@@ -6,13 +6,13 @@ import { PageHeader } from '@/components/shared/PageHeader';
 import { ContactCta } from '@/components/shared/ContactCta';
 import { pageMetadata } from '@/lib/seo';
 import { formatDateRange } from '@/lib/utils/format';
-import { getExperiences, getHomepage } from '@/lib/queries/public';
+import { getExperiences } from '@/lib/queries/public';
 import { assetUrl } from '@/lib/storage';
 
 export const revalidate = 300;
 
 export const metadata: Metadata = pageMetadata({
-  title: 'Professional Experience',
+  title: 'Professional experience and career history',
   description:
     'Career history of Richard Ngasike: roles, responsibilities, contributions and deliverables across software development, design and data work.',
   path: '/experience',
@@ -33,13 +33,14 @@ function DetailList({ title, items }: { title: string; items: string[] }) {
 }
 
 export default async function ExperiencePage() {
-  const [experiences, home] = await Promise.all([getExperiences(), getHomepage()]);
+  const experiences = await getExperiences();
 
   return (
     <>
       <PageHeader
+        path="/experience"
         eyebrow="Professional experience"
-        title="Professional Experience"
+        title="Building solutions, contributing to meaningful work."
         lead="Where I have worked, what I was responsible for and what I delivered."
       />
 
@@ -125,7 +126,7 @@ export default async function ExperiencePage() {
         </div>
       </section>
 
-      <ContactCta heading={home.contact_heading || 'Get in touch'} text={home.contact_invitation} />
+      <ContactCta />
     </>
   );
 }

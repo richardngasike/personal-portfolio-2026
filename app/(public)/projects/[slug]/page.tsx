@@ -11,9 +11,9 @@ import { ScreenshotGrid } from '@/components/gallery/ScreenshotGrid';
 import { ContactCta } from '@/components/shared/ContactCta';
 import { JsonLd } from '@/components/shared/JsonLd';
 import { SITE_URL } from '@/lib/env';
-import { pageMetadata } from '@/lib/seo';
+import { absoluteUrl, breadcrumbJsonLd, pageMetadata } from '@/lib/seo';
 import { PROJECT_STATUS_LABELS, paragraphs } from '@/lib/utils/format';
-import { getHomepage, getProfile, getProjectBySlug, getProjects } from '@/lib/queries/public';
+import { getProfile, getProjectBySlug, getProjects } from '@/lib/queries/public';
 
 export const revalidate = 300;
 
@@ -36,6 +36,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     description: project.seo_description || project.summary || project.overview.slice(0, 160),
     path: `/projects/${project.slug}`,
     image: project.coverUrl,
+    type: 'article',
   });
 }
 
@@ -77,7 +78,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const project = await getProjectBySlug(slug);
   if (!project) notFound();
 
-  const [allProjects, home, profile] = await Promise.all([getProjects(), getHomepage(), getProfile()]);
+  const [allProjects, profile] = await Promise.all([getProjects(), getProfile()]);
   const others = allProjects.filter((item) => item.id !== project.id);
   const related = [
     ...others.filter((item) => item.category_id && item.category_id === project.category_id),
@@ -94,7 +95,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     url: `${SITE_URL}/projects/${project.slug}`,
     ...(project.summary ? { description: project.summary } : {}),
     ...(project.technologies.length > 0 ? { keywords: project.technologies.join(', ') } : {}),
+    ...(project.coverUrl ? { image: absoluteUrl(project.coverUrl) } : {}),
+    ...(project.categoryName ? { genre: project.categoryName } : {}),
+    dateCreated: project.created_at,
+    dateModified: project.updated_at,
     author: { '@type': 'Person', name: profile.full_name, url: SITE_URL },
+    creator: { '@type': 'Person', name: profile.full_name, url: SITE_URL },
   };
 
   return (
@@ -233,15 +239,21 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
             <div className="project-grid">
               {related.map((item) => (
-                <ProjectCard key={item.id} project={item} />
+                <ProjectCard key={item.id} project={item} showSummary={false} />
               ))}
             </div>
           </div>
         </section>
       ) : null}
 
-      <ContactCta heading={home.contact_heading || 'Get in touch'} text={home.contact_invitation} />
+      <ContactCta />
       <JsonLd data={structuredData} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'Projects', path: '/projects' },
+          { name: project.title, path: `/projects/${project.slug}` },
+        ])}
+      />
     </>
   );
 }

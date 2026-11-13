@@ -1,13 +1,17 @@
 import type { ReactNode } from 'react';
+import { breadcrumbJsonLd } from '@/lib/seo';
+import { JsonLd } from './JsonLd';
 
 interface PageHeaderProps {
   eyebrow: string;
   title: string;
   lead?: string;
+  /** Route of the page, used for breadcrumb structured data. */
+  path?: string;
   children?: ReactNode;
 }
 
-export function PageHeader({ eyebrow, title, lead, children }: PageHeaderProps) {
+export function PageHeader({ eyebrow, title, lead, path, children }: PageHeaderProps) {
   return (
     <header className="page-header">
       <div className="container">
@@ -18,6 +22,7 @@ export function PageHeader({ eyebrow, title, lead, children }: PageHeaderProps) 
           {children}
         </div>
       </div>
+      {path ? <JsonLd data={breadcrumbJsonLd([{ name: eyebrow, path }])} /> : null}
     </header>
   );
 }

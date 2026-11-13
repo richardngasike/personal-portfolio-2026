@@ -1,16 +1,18 @@
 .site-footer {
-  border-top: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--muted);
+  background: var(--band-bg);
+  color: var(--band-muted);
   padding-block: var(--space-7) var(--space-5);
+}
+
+.site-footer .wordmark {
+  color: var(--band-text);
 }
 
 .site-footer__grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.2fr) minmax(0, 1fr);
   gap: var(--space-7);
-  padding-bottom: var(--space-6);
-  border-bottom: 1px solid var(--border);
+  padding-bottom: var(--space-7);
 }
 
 .site-footer__brand p {
@@ -21,11 +23,9 @@
 
 .site-footer__heading {
   margin-bottom: var(--space-4);
-  font-size: 0.6875rem;
+  font-size: var(--text-sm);
   font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--text);
+  color: var(--band-text);
 }
 
 .site-footer__links {
@@ -44,7 +44,7 @@
 }
 
 .site-footer__links a:hover {
-  color: var(--text);
+  color: var(--band-text);
 }
 
 .site-footer__bottom {
@@ -54,6 +54,7 @@
   justify-content: space-between;
   gap: var(--space-4);
   padding-top: var(--space-5);
+  border-top: 1px solid var(--band-border);
   font-size: var(--text-xs);
 }
 
@@ -65,19 +66,19 @@
 .site-footer__social a {
   display: grid;
   place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  color: var(--text-2);
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--band-border);
+  border-radius: 50%;
+  color: var(--band-text);
   transition:
     color var(--duration) var(--ease),
     border-color var(--duration) var(--ease);
 }
 
 .site-footer__social a:hover {
-  color: var(--text);
-  border-color: var(--border-strong);
+  color: var(--gold);
+  border-color: var(--gold);
 }
 
 .site-footer__social svg {

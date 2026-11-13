@@ -42,9 +42,9 @@
   --text-base: 1rem;
   --text-md: 1.125rem;
   --text-lg: 1.375rem;
-  --text-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
-  --text-2xl: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem);
-  --text-3xl: clamp(2.1rem, 1.5rem + 2.6vw, 3.4rem);
+  --text-xl: clamp(1.5rem, 1.2rem + 1.3vw, 2.125rem);
+  --text-2xl: clamp(2rem, 1.4rem + 2.6vw, 3.25rem);
+  --text-3xl: clamp(2.5rem, 1.35rem + 4.6vw, 4.5rem);
 
   /* Space */
   --space-1: 0.25rem;
@@ -56,7 +56,7 @@
   --space-7: 3rem;
   --space-8: 4rem;
   --space-9: 6rem;
-  --section-y: clamp(3.5rem, 2rem + 6vw, 7rem);
+  --section-y: clamp(3.5rem, 2rem + 6vw, 6.5rem);
 
   /* Layout */
   --container: 76rem;
@@ -78,9 +78,9 @@
    switches <html data-theme="dark">. The admin does not use these. */
 
 .site {
-  --bg: #f8f8f6;
+  --bg: #fbfaf7;
   --surface: #ffffff;
-  --surface-2: #f1f0ed;
+  --surface-2: #f0eee8;
   --text: #13161a;
   --text-2: #3b3f46;
   --muted: #666a71;
@@ -89,6 +89,12 @@
   --accent: #7d5f17;
   --accent-strong: #b08a35;
   --accent-wash: rgba(201, 160, 69, 0.14);
+  /* The cover and closing band stay dark in both themes. */
+  --band-bg: #101317;
+  --band-surface: #1a1e24;
+  --band-text: #f4f2ec;
+  --band-muted: #a4a7ad;
+  --band-border: rgba(255, 255, 255, 0.12);
   --btn-bg: #13161a;
   --btn-text: #ffffff;
   --btn-hover: #2c3138;
@@ -102,8 +108,10 @@
 }
 
 [data-theme='dark'] .site {
-  --bg: #0e1114;
-  --surface: #161a1f;
+  --bg: #0c0f12;
+  --surface: #14181d;
+  --band-bg: #14181d;
+  --band-surface: #1d2228;
   --surface-2: #1e2329;
   --text: #f2f1ee;
   --text-2: #d0d1d3;
