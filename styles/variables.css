@@ -1,0 +1,127 @@
+/* Design tokens. Every colour, size and space used on the site comes from here. */
+
+:root {
+  /* Charcoal scale */
+  --ink-950: #0b0e12;
+  --ink-900: #12161a;
+  --ink-800: #191d22;
+  --ink-700: #23272d;
+  --ink-600: #343940;
+  --ink-500: #5a5f67;
+  --ink-400: #858990;
+  --ink-300: #b4b6ba;
+
+  /* Paper scale */
+  --paper: #f4f3ef;
+  --paper-deep: #eae8e2;
+  --white: #ffffff;
+  --line: #dcd9d1;
+  --line-strong: #c4c0b6;
+  --line-dark: rgba(255, 255, 255, 0.12);
+
+  /* Accent: restrained gold. --gold on dark surfaces, --gold-ink for text on light. */
+  --gold: #c9a045;
+  --gold-soft: #d9b866;
+  --gold-ink: #7d5f17;
+  --gold-wash: rgba(201, 160, 69, 0.14);
+
+  /* Feedback */
+  --success: #2f6b4a;
+  --success-wash: #e4efe8;
+  --danger: #a3372f;
+  --danger-wash: #f6e6e4;
+  --info-wash: #e8ecf1;
+
+  /* Type */
+  --font-display: 'Newsreader Variable', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --font-sans: 'Instrument Sans Variable', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.375rem;
+  --text-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --text-2xl: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem);
+  --text-3xl: clamp(2.1rem, 1.5rem + 2.6vw, 3.4rem);
+
+  /* Space */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --section-y: clamp(3.5rem, 2rem + 6vw, 7rem);
+
+  /* Layout */
+  --container: 76rem;
+  --container-narrow: 46rem;
+  --gutter: clamp(1rem, 0.4rem + 3vw, 2.5rem);
+  --header-height: 4.5rem;
+
+  /* Shape and motion */
+  --radius-sm: 2px;
+  --radius: 4px;
+  --radius-lg: 8px;
+  --radius-card: 12px;
+  --shadow: 0 1px 2px rgba(11, 14, 18, 0.06), 0 8px 24px rgba(11, 14, 18, 0.06);
+  --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --duration: 180ms;
+}
+
+/* Theme tokens for the public site. Light is the default; the header toggle
+   switches <html data-theme="dark">. The admin does not use these. */
+
+.site {
+  --bg: #f8f8f6;
+  --surface: #ffffff;
+  --surface-2: #f1f0ed;
+  --text: #13161a;
+  --text-2: #3b3f46;
+  --muted: #666a71;
+  --border: #e4e2dc;
+  --border-strong: #cbc8bf;
+  --accent: #7d5f17;
+  --accent-strong: #b08a35;
+  --accent-wash: rgba(201, 160, 69, 0.14);
+  --btn-bg: #13161a;
+  --btn-text: #ffffff;
+  --btn-hover: #2c3138;
+  --header-bg: rgba(255, 255, 255, 0.94);
+  --card-shadow: 0 1px 2px rgba(11, 14, 18, 0.04), 0 10px 28px rgba(11, 14, 18, 0.06);
+
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  color-scheme: light;
+}
+
+[data-theme='dark'] .site {
+  --bg: #0e1114;
+  --surface: #161a1f;
+  --surface-2: #1e2329;
+  --text: #f2f1ee;
+  --text-2: #d0d1d3;
+  --muted: #9da0a6;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.24);
+  --accent: #d9b866;
+  --accent-strong: #c9a045;
+  --accent-wash: rgba(201, 160, 69, 0.16);
+  --btn-bg: #f2f1ee;
+  --btn-text: #13161a;
+  --btn-hover: #ffffff;
+  --header-bg: rgba(14, 17, 20, 0.92);
+  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 28px rgba(0, 0, 0, 0.35);
+  --danger: #ec9089;
+  --danger-wash: rgba(236, 144, 137, 0.12);
+  --success: #86cfa6;
+  --success-wash: rgba(134, 207, 166, 0.1);
+
+  color-scheme: dark;
+}

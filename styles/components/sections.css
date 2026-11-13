@@ -1,0 +1,99 @@
+/* Page scaffolding shared by every public page. */
+
+.section {
+  padding-block: var(--section-y);
+}
+
+.section--white {
+  background: var(--surface);
+  border-block: 1px solid var(--border);
+}
+
+.section--flush-top {
+  padding-top: 0;
+}
+
+.section__header {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.section__header--split {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+}
+
+.section__title {
+  font-size: var(--text-lg);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.page-header {
+  padding-block: clamp(2.5rem, 2rem + 4vw, 5rem) clamp(2rem, 1.5rem + 2vw, 3rem);
+}
+
+.page-header__inner {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 46rem;
+}
+
+.empty-state {
+  padding: var(--space-7) var(--space-5);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-card);
+  text-align: center;
+  color: var(--muted);
+}
+
+.cta {
+  padding-bottom: var(--section-y);
+}
+
+.section--white + .cta {
+  padding-top: var(--section-y);
+}
+
+.cta__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-6);
+  padding: clamp(1.5rem, 1rem + 3vw, 3rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+}
+
+.cta__inner p {
+  margin-top: var(--space-3);
+  max-width: 54ch;
+  color: var(--muted);
+}
+
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.breadcrumbs a:hover {
+  color: var(--text);
+}
+
+.breadcrumbs li + li::before {
+  content: '/';
+  margin-right: var(--space-2);
+}
+
+@media (max-width: 760px) {
+  .section__header--split,
+  .cta__inner {
+    grid-template-columns: 1fr;
+  }
+}

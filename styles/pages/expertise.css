@@ -1,0 +1,50 @@
+.expertise {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+  gap: var(--space-4);
+}
+
+.expertise__card {
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+}
+
+.expertise__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-bottom: var(--space-2);
+  color: var(--text);
+}
+
+.expertise__title {
+  font-size: var(--text-base);
+  font-weight: 650;
+}
+
+.expertise__description {
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.expertise__skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.35em;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--text-2);
+}
+
+.expertise__skills li:not(:last-child)::after {
+  content: ',';
+}
+
+.expertise__skills li[title] {
+  text-decoration: underline dotted var(--border-strong);
+  text-underline-offset: 0.25em;
+}

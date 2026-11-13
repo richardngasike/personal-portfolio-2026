@@ -1,0 +1,332 @@
+/* Admin form controls and the generic record form. */
+
+.admin-root input[type='text'],
+.admin-root input[type='email'],
+.admin-root input[type='url'],
+.admin-root input[type='password'],
+.admin-root input[type='search'],
+.admin-root input[type='number'],
+.admin-root input[type='date'],
+.admin-root select,
+.admin-root textarea {
+  width: 100%;
+  min-height: 2.5rem;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--white);
+  /* 16px on small screens prevents iOS Safari from zooming on focus. */
+  font-size: 1rem;
+  line-height: 1.4;
+  transition:
+    border-color var(--duration) var(--ease),
+    box-shadow var(--duration) var(--ease);
+}
+
+@media (min-width: 720px) {
+  .admin-root input[type='text'],
+  .admin-root input[type='email'],
+  .admin-root input[type='url'],
+  .admin-root input[type='password'],
+  .admin-root input[type='search'],
+  .admin-root input[type='number'],
+  .admin-root input[type='date'],
+  .admin-root select,
+  .admin-root textarea {
+    font-size: 0.9375rem;
+  }
+}
+
+.admin-root textarea {
+  resize: vertical;
+  line-height: 1.55;
+}
+
+.admin-root input:focus,
+.admin-root select:focus,
+.admin-root textarea:focus {
+  outline: none;
+  border-color: var(--ink-900);
+  box-shadow: 0 0 0 3px var(--gold-wash);
+}
+
+.admin-root [aria-invalid='true'] {
+  border-color: var(--danger);
+}
+
+.record-form {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4) var(--space-5);
+}
+
+.field {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+.field--half {
+  grid-column: span 1;
+}
+
+.field__label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.field__label span {
+  color: var(--danger);
+}
+
+.field__help {
+  font-size: 0.8125rem;
+  color: var(--admin-muted);
+}
+
+.field__error {
+  font-size: 0.8125rem;
+  color: var(--danger);
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.check input {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--ink-900);
+}
+
+.check--offset {
+  margin-top: 1.75rem;
+}
+
+.record-form__bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--radius-lg);
+  background: var(--admin-surface);
+  box-shadow: 0 -4px 16px rgba(11, 14, 18, 0.06);
+}
+
+.record-form__status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.8125rem;
+  color: var(--admin-muted);
+}
+
+.record-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+/* List and pairs fields */
+
+.list-field,
+.pairs-field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.list-field__items {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.list-field__item,
+.list-field__add {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.list-field__add {
+  gap: var(--space-2);
+}
+
+.pairs-field__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-3);
+  margin: 0;
+  padding: var(--space-3);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--radius);
+  background: var(--admin-bg);
+}
+
+.pairs-field__inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.pairs-field__input {
+  display: grid;
+  gap: var(--space-1);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--admin-muted);
+}
+
+.pairs-field__controls {
+  display: flex;
+  align-items: start;
+}
+
+.pairs-field > .abtn,
+.list-field__add .abtn {
+  justify-self: start;
+  flex: none;
+}
+
+/* Upload field */
+
+.upload__drop {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-1);
+  width: 100%;
+  padding: var(--space-5);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--admin-bg);
+  color: var(--admin-text);
+  font-weight: 600;
+  transition: border-color var(--duration) var(--ease);
+}
+
+.upload__drop:hover:not(:disabled) {
+  border-color: var(--ink-900);
+}
+
+.upload__drop svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--admin-muted);
+}
+
+.upload__drop small {
+  font-weight: 400;
+  color: var(--admin-muted);
+}
+
+.upload__current {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.upload__preview {
+  width: 9rem;
+  height: 6.5rem;
+  border: 1px solid var(--admin-border);
+  border-radius: var(--radius);
+  background: var(--admin-bg);
+  overflow: hidden;
+}
+
+.upload__preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.upload[data-busy='true'] .upload__preview {
+  opacity: 0.5;
+}
+
+.upload__file {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--radius);
+  background: var(--admin-bg);
+  overflow-wrap: anywhere;
+}
+
+.upload__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.upload__status {
+  font-size: 0.875rem;
+  color: var(--admin-muted);
+}
+
+.progress {
+  display: grid;
+  gap: var(--space-2);
+  font-size: 0.8125rem;
+  color: var(--admin-muted);
+}
+
+.progress__track {
+  height: 0.375rem;
+  border-radius: 999px;
+  background: var(--admin-bg);
+  overflow: hidden;
+}
+
+.progress__bar {
+  height: 100%;
+  background: var(--gold);
+  transition: width var(--duration) var(--ease);
+}
+
+@media (max-width: 720px) {
+  .field-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .field--half {
+    grid-column: 1 / -1;
+  }
+
+  .check--offset {
+    margin-top: 0;
+  }
+
+  .record-form__actions {
+    width: 100%;
+  }
+
+  .record-form__actions .abtn {
+    flex: 1;
+  }
+
+  .pairs-field__row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

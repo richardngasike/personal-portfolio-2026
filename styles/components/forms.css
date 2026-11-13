@@ -1,0 +1,91 @@
+.form {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.form__field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.form__field label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.form__field input,
+.form__field textarea {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  /* 16px minimum prevents iOS Safari from zooming on focus. */
+  font-size: 1rem;
+  line-height: 1.5;
+  transition:
+    border-color var(--duration) var(--ease),
+    box-shadow var(--duration) var(--ease);
+}
+
+.form__field textarea {
+  resize: vertical;
+  min-height: 9rem;
+}
+
+.form__field input:hover,
+.form__field textarea:hover {
+  border-color: var(--muted);
+}
+
+.form__field input:focus,
+.form__field textarea:focus {
+  outline: none;
+  border-color: var(--text);
+  box-shadow: 0 0 0 3px var(--accent-wash);
+}
+
+.form__field input[aria-invalid='true'],
+.form__field textarea[aria-invalid='true'] {
+  border-color: var(--danger);
+}
+
+.form__error {
+  font-size: var(--text-sm);
+  color: var(--danger);
+}
+
+.form__alert {
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--danger);
+  background: var(--danger-wash);
+  color: var(--danger);
+  font-size: var(--text-sm);
+}
+
+.form__trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+
+.form-success {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--success);
+  border-radius: var(--radius);
+  background: var(--success-wash);
+}
+
+.form-success > svg {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: var(--success);
+}
