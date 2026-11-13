@@ -4,8 +4,6 @@
   z-index: 100;
   background: var(--header-bg);
   border-bottom: 1px solid var(--border);
-  backdrop-filter: saturate(140%) blur(10px);
-  -webkit-backdrop-filter: saturate(140%) blur(10px);
 }
 
 .site-header__inner {
@@ -117,29 +115,39 @@
     display: inline-flex;
   }
 
+  .site-header__tools {
+    margin-left: auto;
+  }
+
+  /* Full-screen menu below the header bar. The header carries no filter or
+     transform, so this fixed panel is positioned against the viewport. */
   .site-nav {
     position: fixed;
-    inset: var(--header-height) 0 0 0;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: calc(100dvh - var(--header-height));
     flex-direction: column;
     align-items: stretch;
-    gap: var(--space-6);
+    justify-content: flex-start;
+    gap: var(--space-5);
     margin: 0;
-    padding: var(--space-5) var(--gutter) var(--space-7);
+    padding: var(--space-3) var(--gutter) calc(var(--space-6) + env(safe-area-inset-bottom));
     background: var(--bg);
+    border-top: 1px solid var(--border);
     overflow-y: auto;
+    overscroll-behavior: contain;
     visibility: hidden;
     opacity: 0;
-    transform: translateY(-0.5rem);
     transition:
       opacity var(--duration) var(--ease),
-      transform var(--duration) var(--ease),
       visibility 0s linear var(--duration);
   }
 
   .site-nav[data-open='true'] {
     visibility: visible;
     opacity: 1;
-    transform: none;
     transition-delay: 0s;
   }
 
@@ -150,27 +158,43 @@
   }
 
   .site-nav__link {
-    display: block;
-    padding: var(--space-4) 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 3.25rem;
+    padding: 0;
     border-bottom: 1px solid var(--border);
-    font-family: var(--font-display);
-    font-size: 1.5rem;
+    font-size: 1.0625rem;
+    font-weight: 500;
     color: var(--text);
   }
 
   .site-nav__link[aria-current='page'] {
-    color: var(--accent);
+    font-weight: 650;
   }
 
   .site-nav__link[aria-current='page']::after {
-    display: none;
+    position: static;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--accent-strong);
   }
 
   .site-nav .btn {
-    align-self: flex-start;
+    width: 100%;
+    min-height: 3rem;
+    font-size: var(--text-sm);
+  }
+}
+
+@media (max-width: 380px) {
+  .wordmark {
+    font-size: 1rem;
   }
 
-  .site-header__tools {
-    margin-left: auto;
+  .icon-toggle {
+    width: 2.375rem;
+    height: 2.375rem;
   }
 }
