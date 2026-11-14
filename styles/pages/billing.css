@@ -58,16 +58,15 @@
   line-height: 1.5;
 }
 
-.inv__page {
+/* One continuous sheet at A4 proportions. It grows with the content; the
+   downloadable PDF is what paginates into real A4 pages. */
+.inv__sheet {
   position: relative;
-  padding: clamp(1.5rem, 0.75rem + 4vw, 3.25rem);
+  width: 100%;
+  padding: clamp(1.5rem, 0.6rem + 4vw, 3.5rem);
   background: #ffffff;
   border: 1px solid var(--line);
   box-shadow: var(--card-shadow);
-}
-
-.inv__page + .inv__page {
-  margin-top: var(--space-5);
 }
 
 .inv__rule {
@@ -342,7 +341,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-7);
-  margin-top: var(--space-6);
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--line);
+  break-inside: avoid;
 }
 
 .inv__sign-col {
@@ -468,6 +470,11 @@
 }
 
 @media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+
   .billing__bar {
     display: none;
   }
@@ -479,15 +486,25 @@
     max-width: none;
   }
 
-  .inv__page {
+  .inv__sheet {
     border: 0;
     box-shadow: none;
     padding: 0;
   }
 
-  .inv__page--sign {
-    margin-top: 0;
-    break-before: page;
+  /* Fill each page, then flow to the next; keep these blocks whole. */
+  .inv__panels,
+  .inv__billto,
+  .inv__words,
+  .inv__table tr,
+  .inv__bank tr,
+  .inv__sign,
+  .inv__footer {
+    break-inside: avoid;
+  }
+
+  .inv__heading {
+    break-after: avoid;
   }
 
   .inv__rule,

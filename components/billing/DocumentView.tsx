@@ -42,7 +42,7 @@ export function DocumentView({ document, issuer, shareUrl }: DocumentViewProps) 
 
   return (
     <article className={`inv inv--${document.kind}`} aria-label={`${KIND_LABELS[document.kind]} ${document.number}`}>
-      <div className="inv__page">
+      <div className="inv__sheet">
         <span className="inv__rule" aria-hidden="true" />
 
         <header className="inv__head">
@@ -197,10 +197,7 @@ export function DocumentView({ document, issuer, shareUrl }: DocumentViewProps) 
           {KIND_LABELS[document.kind]} - {issuer.name}
           {document.client_company || document.client_name ? ` | ${document.client_company || document.client_name}` : ''} | {year}
         </p>
-      </div>
 
-      <div className="inv__page inv__page--sign">
-        <span className="inv__rule" aria-hidden="true" />
         <section className="inv__sign">
           <div className="inv__sign-col">
             <p className="inv__party-name">{issuer.name}</p>

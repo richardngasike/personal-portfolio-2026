@@ -305,21 +305,30 @@ export async function renderBillingPdf(doc: BillingDocument, issuer: Issuer, sha
     }
   }
 
-  // Footline
+  // Footline (flows after the content)
+  y += 12;
+  ensure(30);
+  hline(y);
+  y += 10;
   const footline = `${label} - ${issuer.name}${doc.client_company || doc.client_name ? ` | ${doc.client_company || doc.client_name}` : ''} | ${doc.issue_date.slice(0, 4)}`;
-  hline(A4.height - MARGIN - 14);
-  textAt(footline, (A4.width - sans.widthOfTextAtSize(clean(footline), 8)) / 2, A4.height - MARGIN - 10, 8, sans, SOFT);
+  textAt(footline, (A4.width - sans.widthOfTextAtSize(clean(footline), 8)) / 2, y, 8, sans, SOFT);
+  y += 24;
 
-  // ---- Page 2: signatures --------------------------------------------------
-  startPage();
-  y += 20;
+  // Signature block. It flows after the content and only moves to a new page
+  // if it does not fit; the footer is kept with it so they never split.
+  const logoH = logo ? Math.min(44, (logo.height * 150) / logo.width) : 0;
+  const signBlockH = 16 + 30 + (logo ? logoH + 6 : 0) + 2 * 18 + 60;
+  ensure(signBlockH);
+  y += 16;
   const colW = (WIDTH - 40) / 2;
   const signCols: Array<{ x: number; name: string; role: string; lines: string[]; mark: boolean }> = [
     { x: MARGIN, name: issuer.name, role: isInvoice ? 'Service provider' : 'Prepared by', lines: ['Signature: ____________________________', `Date: ${formatDate(doc.issue_date)}`], mark: Boolean(logo) },
     { x: MARGIN + colW + 40, name: `For ${doc.client_company || doc.client_name}`, role: isInvoice ? 'Received / Approved' : 'Accepted', lines: ['Name: ____________________________', 'Signature / Date: ____________________'], mark: false },
   ];
+  const signTop = y;
+  let signBottom = y;
   for (const col of signCols) {
-    let sy = y;
+    let sy = signTop;
     textAt(col.name, col.x, sy, 10.5, bold, INK);
     sy += 16;
     textAt(col.role, col.x, sy, 9.5, sans, SOFT);
@@ -333,12 +342,16 @@ export async function renderBillingPdf(doc: BillingDocument, issuer: Issuer, sha
       textAt(line, col.x, sy, 9.5, sans, BODY);
       sy += 18;
     }
+    signBottom = Math.max(signBottom, sy);
   }
+  y = signBottom + 20;
 
-  // Footer with website + link
-  hline(A4.height - MARGIN - 32);
-  textAt(issuer.website, (A4.width - bold.widthOfTextAtSize(clean(issuer.website), 9.5)) / 2, A4.height - MARGIN - 26, 9.5, bold, INK);
-  textAt(shareUrl, (A4.width - sans.widthOfTextAtSize(clean(shareUrl), 8)) / 2, A4.height - MARGIN - 13, 8, sans, RED);
+  // Footer: website and the shareable link, at the end of the document.
+  hline(y);
+  y += 10;
+  textAt(issuer.website, (A4.width - bold.widthOfTextAtSize(clean(issuer.website), 9.5)) / 2, y, 9.5, bold, INK);
+  y += 13;
+  textAt(shareUrl, (A4.width - sans.widthOfTextAtSize(clean(shareUrl), 8)) / 2, y, 8, sans, RED);
 
   return pdf.save();
 }
