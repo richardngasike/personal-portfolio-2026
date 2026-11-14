@@ -70,19 +70,18 @@ export default async function ExperiencePage() {
                           <img className="experience__logo" src={logoUrl} alt="" loading="lazy" />
                         ) : null}
                         <div>
-                          <h2 className="experience__org">
-                            {experience.organisation}
-                            {experience.department ? ` - ${experience.department}` : ''}
-                          </h2>
-                          <p className="experience__role">
-                            {[experience.engagement_type, experience.job_title].filter(Boolean).join(' | ')}
+                          <h2 className="experience__org">{experience.organisation}</h2>
+                          {experience.department ? <p className="experience__dept">{experience.department}</p> : null}
+                          <p className="experience__role">{experience.job_title}</p>
+                          <p className="experience__meta">
+                            <span>{[dates, experience.location].filter(Boolean).join(' / ')}</span>
+                            <span className="timeline__badge" data-current={experience.is_current}>
+                              {[experience.engagement_type, experience.is_current ? 'Current' : 'Past']
+                                .filter(Boolean)
+                                .join(' / ')}
+                            </span>
                           </p>
-                          <p className="experience__meta">{[dates, experience.location].filter(Boolean).join(' / ')}</p>
                         </div>
-                        <p className="timeline__badge" data-current={experience.is_current}>
-                          <span>{experience.engagement_type || 'Role'}</span>
-                          <span>({experience.is_current ? 'Current' : 'Past'})</span>
-                        </p>
                       </header>
 
                       {experience.overview ? <p className="experience__overview">{experience.overview}</p> : null}

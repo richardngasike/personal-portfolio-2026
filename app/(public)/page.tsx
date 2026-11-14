@@ -50,7 +50,6 @@ export default async function HomePage() {
   const portraitUrl = assetUrl('profile-images', home.hero_image_path || profile.photo_path);
   const heading = home.hero_heading || profile.headline || profile.full_name;
   const description = home.hero_description || profile.short_intro;
-  const currentRole = experiences.find((experience) => experience.is_current);
   const [leadProject, ...otherProjects] = featured;
 
   // A button that points at the CV is only shown while a CV is published.
@@ -91,24 +90,27 @@ export default async function HomePage() {
 
             {portraitUrl ? (
               <figure className="hero__figure">
+                {/* The portrait stands in front of the shape: clipped to it at the
+                    bottom, free to rise above it at the top. */}
+                <svg className="hero__blob" viewBox="0 0 500 500" aria-hidden="true" focusable="false">
+                  <path d="M250.0000 15.0000C303.3333 7.5000 360.8333 22.5000 400.0000 50.0000C439.1667 77.5000 476.6667 131.6667 485.0000 180.0000C493.3333 228.3333 470.8333 292.5000 450.0000 340.0000C429.1667 387.5000 400.0000 440.0000 360.0000 465.0000C320.0000 490.0000 258.3333 497.5000 210.0000 490.0000C161.6667 482.5000 102.5000 458.3333 70.0000 420.0000C37.5000 381.6667 13.3333 314.1667 15.0000 260.0000C16.6667 205.8333 40.8333 135.8333 80.0000 95.0000C119.1667 54.1667 196.6667 22.5000 250.0000 15.0000Z" />
+                </svg>
                 <div className="hero__portrait">
                   <Image
                     src={portraitUrl}
                     alt={`Portrait of ${profile.full_name}`}
                     fill
                     priority
-                    sizes="(max-width: 900px) 60vw, 352px"
+                    sizes="(max-width: 900px) 90vw, 520px"
                   />
                 </div>
-                <figcaption className="hero__caption">
-                  <strong>{profile.full_name}</strong>
-                  {currentRole ? (
-                    <span>
-                      {currentRole.job_title}, {currentRole.organisation}
-                    </span>
-                  ) : null}
-                  {profile.location ? <span>{profile.location}</span> : null}
-                </figcaption>
+                <svg className="hero__clip" width="0" height="0" aria-hidden="true" focusable="false">
+                  <defs>
+                    <clipPath id="hero-portrait-clip" clipPathUnits="objectBoundingBox">
+                      <path d="M0 0H1V0.6H0ZM0.5000 0.2240C0.6067 0.2120 0.7217 0.2360 0.8000 0.2800C0.8783 0.3240 0.9533 0.4107 0.9700 0.4880C0.9867 0.5653 0.9417 0.6680 0.9000 0.7440C0.8583 0.8200 0.8000 0.9040 0.7200 0.9440C0.6400 0.9840 0.5167 0.9960 0.4200 0.9840C0.3233 0.9720 0.2050 0.9333 0.1400 0.8720C0.0750 0.8107 0.0267 0.7027 0.0300 0.6160C0.0333 0.5293 0.0817 0.4173 0.1600 0.3520C0.2383 0.2867 0.3933 0.2360 0.5000 0.2240Z" />
+                    </clipPath>
+                  </defs>
+                </svg>
               </figure>
             ) : null}
           </div>

@@ -8,6 +8,11 @@
   color: var(--band-text);
 }
 
+.site-footer .wordmark img {
+  height: 3.75rem;
+  max-width: min(18rem, 70vw);
+}
+
 .site-footer__grid {
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.2fr) minmax(0, 1fr);

@@ -1,11 +1,4 @@
-#!/usr/bin/env node
-// Creates (or promotes) the administrator account.
-//
-//   node --env-file=.env.local scripts/create-admin.mjs you@example.com "Your Name"
-//
-// The password is read from the ADMIN_PASSWORD environment variable or asked
-// for interactively, so it never lands in shell history. Requires
-// NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.
+
 
 import { createInterface } from 'node:readline/promises';
 import { createClient } from '@supabase/supabase-js';

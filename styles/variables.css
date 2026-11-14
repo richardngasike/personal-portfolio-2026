@@ -61,8 +61,8 @@
   /* Layout */
   --container: 76rem;
   --container-narrow: 46rem;
-  --gutter: clamp(1rem, 0.4rem + 3vw, 2.5rem);
-  --header-height: 4rem;
+  --gutter: clamp(1.25rem, 0.5rem + 3vw, 2.5rem);
+  --header-height: 4.75rem;
 
   /* Shape and motion */
   --radius-sm: 2px;
@@ -95,6 +95,7 @@
   --band-text: #f4f2ec;
   --band-muted: #a4a7ad;
   --band-border: rgba(255, 255, 255, 0.12);
+  --blob: #ecdfc4;
   --btn-bg: #13161a;
   --btn-text: #ffffff;
   --btn-hover: #2c3138;
@@ -121,6 +122,7 @@
   --accent: #d9b866;
   --accent-strong: #c9a045;
   --accent-wash: rgba(201, 160, 69, 0.16);
+  --blob: #3b3626;
   --btn-bg: #f2f1ee;
   --btn-text: #13161a;
   --btn-hover: #ffffff;

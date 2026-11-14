@@ -26,8 +26,19 @@
 }
 
 .wordmark img {
-  height: 1.75rem;
+  display: block;
+  height: 3.5rem;
   width: auto;
+  max-width: min(16rem, 52vw);
+  object-fit: contain;
+  object-position: left center;
+}
+
+/* A signature is dark ink on a transparent background, so it is turned
+   white wherever it sits on a dark surface. */
+[data-theme='dark'] .wordmark--image img,
+.site-footer .wordmark--image img {
+  filter: brightness(0) invert(1);
 }
 
 .site-header__tools {
@@ -185,6 +196,12 @@
     width: 100%;
     min-height: 3rem;
     font-size: var(--text-sm);
+  }
+}
+
+@media (max-width: 560px) {
+  .wordmark img {
+    height: 3rem;
   }
 }
 

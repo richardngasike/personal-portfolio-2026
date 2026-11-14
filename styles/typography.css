@@ -41,6 +41,13 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
+  text-wrap: balance;
+}
+
+@media (max-width: 480px) {
+  .eyebrow {
+    letter-spacing: 0.12em;
+  }
 }
 
 .lead {

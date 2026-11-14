@@ -6,9 +6,9 @@
 
 .hero__inner {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr);
-  align-items: end;
-  gap: clamp(2rem, 1rem + 5vw, 5rem);
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: clamp(1.5rem, 1rem + 3vw, 3.5rem);
 }
 
 .hero__content {
@@ -33,38 +33,39 @@
 }
 
 .hero__figure {
-  display: grid;
-  gap: var(--space-3);
+  position: relative;
   justify-self: end;
   width: 100%;
-  max-width: 22rem;
+  max-width: 30rem;
+  margin: 0;
+  aspect-ratio: 4 / 5;
+}
+
+/* Organic shape behind the portrait. It is a square at the foot of the
+   figure; the portrait box is taller, so head and shoulders clear its top. */
+.hero__blob {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  fill: var(--blob);
 }
 
 .hero__portrait {
-  position: relative;
-  aspect-ratio: 4 / 5;
-  background: var(--surface-2);
-  border-radius: 14px;
-  overflow: hidden;
+  position: absolute;
+  inset: 0;
+  clip-path: url(#hero-portrait-clip);
 }
 
 .hero__portrait img {
-  object-fit: cover;
-  object-position: top center;
+  object-fit: contain;
+  object-position: bottom center;
 }
 
-.hero__caption {
-  display: grid;
-  gap: 0.1rem;
-  padding-left: var(--space-4);
-  border-left: 2px solid var(--accent-strong);
-  font-size: var(--text-sm);
-  color: var(--muted);
-}
-
-.hero__caption strong {
-  font-weight: 600;
-  color: var(--text);
+.hero__clip {
+  position: absolute;
 }
 
 .hero__disciplines {
@@ -227,9 +228,11 @@
     align-items: start;
   }
 
+  /* On small screens the portrait leads and the words follow. */
   .hero__figure {
-    justify-self: start;
-    max-width: 17rem;
+    grid-row: 1;
+    justify-self: center;
+    max-width: min(82%, 20rem);
   }
 
   .hero__disciplines {

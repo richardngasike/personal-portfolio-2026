@@ -233,8 +233,8 @@ export const RESOURCES: Record<ResourceKey, ResourceDef> = {
         title: 'Identity',
         fields: [
           { name: 'site_title', label: 'Website title', type: 'text', required: true, maxLength: 120, half: true },
-          { name: 'wordmark', label: 'Wordmark', type: 'text', maxLength: 60, half: true, help: 'Name shown in the header and footer.' },
-          { name: 'logo_path', label: 'Logo', type: 'image', bucket: 'website-assets', folder: 'logo', help: 'Optional. Replaces the monogram next to the wordmark.' },
+          { name: 'wordmark', label: 'Wordmark', type: 'text', maxLength: 60, half: true, help: 'Name shown in the header and footer when no signature or logo is uploaded.' },
+          { name: 'logo_path', label: 'Signature or logo', type: 'image', bucket: 'website-assets', folder: 'logo', help: 'Optional. Shown in the header and footer in place of your name. Use dark ink on a transparent background (PNG, SVG or WebP); it is turned white automatically on dark backgrounds.' },
           { name: 'favicon_path', label: 'Favicon', type: 'image', bucket: 'website-assets', folder: 'favicon' },
         ],
       },

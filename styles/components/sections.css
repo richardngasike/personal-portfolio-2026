@@ -142,9 +142,28 @@
 }
 
 @media (max-width: 760px) {
-  .section__header--split,
+  /* Title and link stay on one line and wrap only when they cannot fit. */
+  .section__header--split {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-4);
+  }
+
   .cta__inner {
     grid-template-columns: 1fr;
     align-items: start;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta__actions {
+    justify-items: stretch;
+  }
+
+  .cta__actions .btn {
+    width: 100%;
+    min-height: 3rem;
   }
 }
