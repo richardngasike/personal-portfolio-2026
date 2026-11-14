@@ -36,3 +36,20 @@ export interface GalleryItem {
   categoryName: string | null;
   featured: boolean;
 }
+
+export interface PostSummary {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  coverUrl: string | null;
+  publishedAt: string;
+  tags: string[];
+}
+
+export interface PostDetail extends PostSummary {
+  body: string;
+  seoTitle: string;
+  seoDescription: string;
+  updatedAt: string;
+}

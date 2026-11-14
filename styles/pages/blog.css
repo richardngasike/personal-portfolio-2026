@@ -1,0 +1,150 @@
+/* Blog list and single post. */
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  gap: clamp(1.75rem, 1.25rem + 2vw, 2.75rem) var(--space-6);
+}
+
+.post-card {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: var(--space-4);
+}
+
+.post-card__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 2;
+  border-radius: 10px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.post-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 500ms var(--ease);
+}
+
+.post-card:hover .post-card__media img {
+  transform: scale(1.03);
+}
+
+.post-card__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-4);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1.1;
+  color: var(--muted);
+}
+
+.post-card__body {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+}
+
+.post-card__date {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.post-card__title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 450;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.post-card__title a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--accent-strong);
+  text-underline-offset: 0.2em;
+}
+
+.post-card__excerpt {
+  color: var(--text-2);
+  font-size: var(--text-sm);
+}
+
+/* Single post */
+
+.post {
+  display: grid;
+  gap: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+}
+
+.post__header {
+  padding-top: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+}
+
+.post__crumbs {
+  margin-bottom: var(--space-4);
+}
+
+.post__date {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: var(--space-3);
+}
+
+.post__title {
+  max-width: 20ch;
+}
+
+.post__lead {
+  margin-top: var(--space-4);
+}
+
+.post__cover-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.post__cover-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post__body {
+  font-size: var(--text-md);
+}
+
+.post__body p + p {
+  margin-top: 1.2em;
+}
+
+.post__tags {
+  padding-top: var(--space-2);
+}
+
+.post__back {
+  justify-self: start;
+}
+
+.post__back svg {
+  order: -1;
+}
+
+.post__back:hover svg {
+  transform: translateX(-3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .post-card__media img {
+    transition: none;
+  }
+}

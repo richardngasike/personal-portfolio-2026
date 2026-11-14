@@ -82,6 +82,8 @@ export interface ResourceDef {
   publishable: boolean;
   featurable?: boolean;
   orderable: boolean;
+  /** Default sort for non-orderable resources (e.g. newest posts first). */
+  defaultOrder?: { column: string; ascending: boolean };
   searchFields: string[];
   columns: ListColumn[];
   filterField?: string;
@@ -101,7 +103,8 @@ export type ResourceKey =
   | 'gallery-categories'
   | 'gallery'
   | 'social-links'
-  | 'documents';
+  | 'documents'
+  | 'posts';
 
 const PROJECT_STATUS = [
   { value: 'in_development', label: 'In development' },
@@ -656,6 +659,47 @@ export const RESOURCES: Record<ResourceKey, ResourceDef> = {
           },
           { name: 'label', label: 'Label', type: 'text', required: true, maxLength: 60, half: true },
           { name: 'url', label: 'URL', type: 'url', required: true },
+        ],
+      },
+    ],
+  },
+
+  posts: {
+    key: 'posts',
+    table: 'posts',
+    singular: 'Post',
+    plural: 'Blog',
+    description: 'News, updates and short articles shown on the Blog page, newest first.',
+    titleField: 'title',
+    subtitleField: 'excerpt',
+    imageField: 'cover_path',
+    publishable: true,
+    orderable: false,
+    defaultOrder: { column: 'published_at', ascending: false },
+    searchFields: ['title', 'excerpt', 'body'],
+    columns: [
+      { field: 'title', label: 'Post' },
+      { field: 'published_at', label: 'Date' },
+      { field: 'published', label: 'Status', type: 'status' },
+    ],
+    groups: [
+      {
+        title: 'Post',
+        fields: [
+          { name: 'title', label: 'Title', type: 'text', required: true, maxLength: 200 },
+          { name: 'slug', label: 'Slug', type: 'slug', required: true, slugFrom: 'title', half: true, help: 'Used in the address: /blog/your-slug' },
+          { name: 'published_at', label: 'Date', type: 'date', required: true, half: true, help: 'Shown on the post and used to order the blog.' },
+          { name: 'cover_path', label: 'Image', type: 'image', bucket: 'gallery-images', folder: 'posts' },
+          { name: 'excerpt', label: 'Caption or summary', type: 'textarea', maxLength: 400, help: 'One or two lines. Shown on the blog list and in search results. For a photo update, this is the caption.' },
+          { name: 'body', label: 'Body', type: 'longtext', maxLength: 20000, help: 'Optional. Longer text for an article. Leave a blank line between paragraphs. Can be empty for a simple photo and caption.' },
+          { name: 'tags', label: 'Tags', type: 'list', itemLabel: 'tag' },
+        ],
+      },
+      {
+        title: 'Search',
+        fields: [
+          { name: 'seo_title', label: 'Search title', type: 'text', maxLength: 70, help: 'Optional. Defaults to the title.' },
+          { name: 'seo_description', label: 'Search description', type: 'textarea', maxLength: 200, help: 'Optional. Defaults to the caption.' },
         ],
       },
     ],

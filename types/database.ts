@@ -226,3 +226,19 @@ export interface ContactMessageRow {
   is_archived: boolean;
   created_at: string;
 }
+
+export interface PostRow {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  body: string;
+  cover_path: string | null;
+  tags: string[];
+  published_at: string;
+  published: boolean;
+  seo_title: string;
+  seo_description: string;
+  created_at: string;
+  updated_at: string;
+}

@@ -38,6 +38,7 @@ export default async function ResourcePage({ params }: ResourcePageProps) {
 
   let query = supabase.from(resource.table).select('*');
   if (resource.orderable) query = query.order('sort_order', { ascending: true });
+  else if (resource.defaultOrder) query = query.order(resource.defaultOrder.column, { ascending: resource.defaultOrder.ascending });
   const [{ data: rows }, relations] = await Promise.all([query, loadRelations(supabase, resource)]);
 
   return (

@@ -62,3 +62,11 @@ export const PROJECT_STATUS_LABELS: Record<string, string> = {
   completed: 'Completed',
   archived: 'Archived',
 };
+
+// "2026-11-14" -> "14 November 2026", time-zone safe. Used by the blog.
+export function formatLongDate(value: string | null | undefined): string {
+  if (!value) return '';
+  const [year, month, day] = String(value).slice(0, 10).split('-').map(Number);
+  if (!year || !month || !day) return '';
+  return `${day} ${MONTHS[month - 1]} ${year}`;
+}

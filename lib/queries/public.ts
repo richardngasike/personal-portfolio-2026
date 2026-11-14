@@ -15,9 +15,10 @@ import type {
   SettingsRow,
   SkillCategoryRow,
   SkillRow,
+  PostRow,
   SocialLinkRow,
 } from '@/types/database';
-import type { GalleryItem, ProjectDetail, ProjectSummary, SkillGroup } from '@/types/portfolio';
+import type { GalleryItem, PostDetail, PostSummary, ProjectDetail, ProjectSummary, SkillGroup } from '@/types/portfolio';
 
 // All public reads go through the anonymous client, so Row Level Security
 // guarantees that only published content is ever returned. Each query fails
@@ -226,4 +227,49 @@ export const hasCurrentCv = cache(async (): Promise<boolean> => {
     .limit(1);
   if (error) return false;
   return Boolean(data && data.length > 0);
+});
+
+// Blog ------------------------------------------------------------------------
+
+function toPostSummary(row: PostRow): PostSummary {
+  return {
+    id: row.id,
+    slug: row.slug,
+    title: row.title,
+    excerpt: row.excerpt,
+    coverUrl: assetUrl('gallery-images', row.cover_path),
+    publishedAt: row.published_at,
+    tags: row.tags,
+  };
+}
+
+export const getPosts = cache(async (): Promise<PostSummary[]> => {
+  const supabase = createPublicClient();
+  if (!supabase) return [];
+  const { data, error } = await supabase
+    .from('posts')
+    .select('*')
+    .order('published_at', { ascending: false })
+    .order('created_at', { ascending: false });
+  if (error) {
+    console.error(`[queries] posts: ${error.message}`);
+    return [];
+  }
+  return ((data ?? []) as PostRow[]).map(toPostSummary);
+});
+
+export const getPostBySlug = cache(async (slug: string): Promise<PostDetail | null> => {
+  const supabase = createPublicClient();
+  if (!supabase) return null;
+  const { data, error } = await supabase.from('posts').select('*').eq('slug', slug).maybeSingle();
+  if (error) console.error(`[queries] posts/${slug}: ${error.message}`);
+  if (!data) return null;
+  const row = data as PostRow;
+  return {
+    ...toPostSummary(row),
+    body: row.body,
+    seoTitle: row.seo_title,
+    seoDescription: row.seo_description,
+    updatedAt: row.updated_at,
+  };
 });
