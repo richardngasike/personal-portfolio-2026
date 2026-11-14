@@ -330,3 +330,208 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* Billing form: document editor with a main column and a sticky side column. */
+
+.billing-form__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 22rem);
+  gap: var(--space-5);
+  align-items: start;
+}
+
+.billing-form__main,
+.billing-form__side {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.billing-form__side {
+  position: sticky;
+  top: calc(3.75rem + var(--space-4));
+}
+
+.line-items {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.line-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 5rem 7rem minmax(5rem, auto) auto;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.line-item__total {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  text-align: right;
+  white-space: nowrap;
+  color: var(--admin-text);
+}
+
+.line-item__controls {
+  display: flex;
+  gap: 0.125rem;
+}
+
+.billing-summary {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--admin-border);
+  font-variant-numeric: tabular-nums;
+}
+
+.billing-summary > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.billing-summary dt {
+  color: var(--admin-muted);
+}
+
+.billing-summary dd {
+  font-weight: 500;
+  color: var(--admin-text);
+}
+
+.billing-summary__total {
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--admin-border);
+}
+
+.billing-summary__total dt,
+.billing-summary__total dd {
+  font-weight: 700;
+  color: var(--admin-text);
+}
+
+.billing-summary__due dd {
+  font-weight: 700;
+  color: var(--gold-ink);
+}
+
+/* Share panel on the edit page */
+
+.share-panel {
+  border-color: var(--gold-ink);
+}
+
+.share-panel__draft {
+  padding: var(--space-3);
+  margin-bottom: var(--space-2);
+  background: var(--gold-wash);
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+}
+
+.share-panel__link {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.share-panel__link input {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+}
+
+.share-panel__actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.share-panel__status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--admin-border);
+}
+
+.share-panel__status-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--admin-muted);
+}
+
+.share-panel__status-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.abtn[data-active='true'] {
+  background: var(--ink-900);
+  border-color: var(--ink-900);
+  color: var(--white);
+}
+
+/* Status pills in the billing list */
+
+.pill[data-billing-status] {
+  background: var(--info-wash);
+  color: var(--admin-muted);
+}
+
+.pill[data-billing-status='paid'],
+.pill[data-billing-status='accepted'] {
+  background: var(--success-wash);
+  color: var(--success);
+}
+
+.pill[data-billing-status='sent'] {
+  background: var(--gold-wash);
+  color: var(--gold-ink);
+}
+
+.pill[data-billing-status='cancelled'],
+.pill[data-billing-status='declined'] {
+  background: var(--danger-wash);
+  color: var(--danger);
+}
+
+@media (max-width: 1040px) {
+  .billing-form__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .billing-form__side {
+    position: static;
+  }
+}
+
+@media (max-width: 620px) {
+  .line-item {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--radius);
+  }
+
+  .line-item__desc {
+    grid-column: 1 / -1;
+  }
+
+  .line-item__qty,
+  .line-item__price {
+    grid-column: span 1;
+  }
+
+  .line-item__total {
+    grid-column: 1;
+    text-align: left;
+  }
+
+  .line-item__controls {
+    grid-column: 2;
+    justify-content: flex-end;
+  }
+}

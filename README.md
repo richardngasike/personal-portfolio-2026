@@ -77,6 +77,19 @@ Requires Node.js 20 or newer.
 3. Deploy, then open `/admin/login`.
 4. Domain: in Vercel > Project > Domains add `richardngasike.co.ke` and `www.richardngasike.co.ke`. If the current site is already a Vercel project on this account, move the domain to the new project there; no DNS change is needed. If it is hosted elsewhere, change only the records Vercel asks for (the apex A record and the `www` CNAME). Leave nameservers and mail records as they are. Vercel issues the SSL certificate automatically.
 
+## Invoices and quotations
+
+The admin has an **Invoices & quotes** section (`/admin/billing`) for billing clients.
+
+- Create an invoice or a quotation, enter the client, line items, discount, tax and payment terms. Totals are computed as you type.
+- Each document gets an automatic reference (`INV-2026-0001`, `QUO-2026-0001`; the two series are numbered separately per year) and a private share link, for example `richardngasike.co.ke/invoice/2026/7/28-K7M2Q9XA`. The random code at the end keeps the link private to whoever you send it to.
+- Share the link: the client opens a branded page where they can view, download the PDF, print, or share it onward. Invoices and quotations each have their own design but use the same brand (your signature/logo, charcoal, gold accent, serif headings).
+- A document stays a **draft** (its link returns 404) until you set the status to Sent or later. Mark invoices Paid, or quotations Accepted/Declined, from the edit page.
+- Billing data is admin-only. Visitors have no database access to it at all; the public pages fetch a single document by its exact secret link, server-side.
+
+To enable this on an existing database, run `supabase/add-billing.sql` once in the Supabase SQL Editor. (A fresh setup from `supabase-setup.sql` does not include it — run `add-billing.sql` after.)
+
+
 ## Security model
 
 - `/admin` is gated three times: `proxy.ts` (session), every page and Server Action (`requireAdminPage` / `requireAdminAction`, which verify the user with Supabase Auth and read the role from `admin_profiles`), and RLS in the database (`public.is_admin()`).
@@ -94,4 +107,3 @@ Requires Node.js 20 or newer.
 ## Content
 
 `content-import/CONTENT-NOTES.md` lists where each seeded record came from and what was left as an unpublished draft for review.
-# personal-portfolio-2026

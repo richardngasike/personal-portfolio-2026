@@ -59,6 +59,7 @@ export function AdminShell({ userName, unreadMessages, children }: AdminShellPro
       items: [
         { href: '/admin', label: 'Dashboard', icon: FiGrid },
         { href: '/admin/messages', label: 'Messages', icon: FiInbox, badge: unreadMessages },
+        { href: '/admin/billing', label: 'Invoices & quotes', icon: FiFileText },
       ],
     },
     {
