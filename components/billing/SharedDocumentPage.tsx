@@ -40,7 +40,7 @@ export async function SharedDocumentPage({ kind, year, month, code }: SharedProp
         </Link>
         <ShareBar url={url} pdfHref={`/${document.share_path}/pdf`} title={`${KIND_LABELS[kind]} ${document.number} from ${issuer.name}`} />
       </div>
-      <DocumentView document={document} issuer={issuer} />
+      <DocumentView document={document} issuer={issuer} shareUrl={url} />
     </main>
   );
 }

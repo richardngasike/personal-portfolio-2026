@@ -59,8 +59,19 @@ export const getIssuer = cache(async (): Promise<Issuer> => {
     email: profile.email,
     phone: profile.phone,
     location: profile.location,
+    address: settings.invoice_from_address,
     website: SITE_URL.replace(/^https?:\/\//, ''),
     logoUrl: assetUrl('website-assets', settings.logo_path),
+    banking: {
+      accountName: settings.bank_account_name,
+      accountNumber: settings.bank_account_number,
+      bankName: settings.bank_name,
+      branch: settings.bank_branch,
+      bankAddress: settings.bank_address,
+      iban: settings.bank_iban,
+      swift: settings.bank_swift,
+      mpesa: settings.mpesa_details,
+    },
   };
 });
 

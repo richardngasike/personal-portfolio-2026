@@ -61,6 +61,15 @@ export interface SettingsRow {
   copyright_holder: string;
   copyright_start_year: number | null;
   seo_keywords: string[];
+  invoice_from_address: string;
+  bank_account_name: string;
+  bank_account_number: string;
+  bank_name: string;
+  bank_branch: string;
+  bank_address: string;
+  bank_iban: string;
+  bank_swift: string;
+  mpesa_details: string;
   updated_at: string;
 }
 

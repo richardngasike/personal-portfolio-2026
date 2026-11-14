@@ -40,7 +40,8 @@ const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
 // "2026-07-28" -> "28 July 2026", without time-zone shifts.
 export function formatDate(value: string | null): string {
   if (!value) return '';
-  const [year, month, day] = value.split('-').map(Number);
+  // Accept 'YYYY-MM-DD' or a full ISO datetime; take only the date part.
+  const [year, month, day] = String(value).slice(0, 10).split('-').map(Number);
   if (!year || !month || !day) return '';
   return `${day} ${MONTHS[month - 1]} ${year}`;
 }

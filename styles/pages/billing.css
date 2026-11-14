@@ -1,9 +1,11 @@
-/* Shared invoice and quotation pages. The sheet is always light, like paper,
-   whichever theme the visitor uses. */
+/* Shared invoice and quotation pages, built to match Richard's formal
+   template: red accents, grey information panels, a red-headed deliverables
+   table, amount in words, banking details and a signature block. The sheet is
+   always light (like paper) whichever theme the visitor's browser uses. */
 
 .billing__main {
   width: 100%;
-  max-width: 56rem;
+  max-width: 60rem;
   margin-inline: auto;
   padding: clamp(1rem, 0.5rem + 2vw, 2.5rem) clamp(0.75rem, 0.25rem + 2.5vw, 2rem) var(--space-8);
 }
@@ -38,325 +40,355 @@
   padding: 0 var(--space-4);
 }
 
-.doc {
-  --ink: #101317;
-  --body: #2a2e33;
-  --soft: #6b6f76;
-  --hair: #dedbd3;
-  --gold: #b8892b;
-  --sand: #f7f5ee;
+/* The document. Font and colours are self-contained so the sheet looks the
+   same in light and dark mode and in print. */
+.inv {
+  --ink: #1a1a1a;
+  --body: #333333;
+  --soft: #6b6b6b;
+  --red: #c0392b;
+  --red-dark: #b0392e;
+  --panel: #f4f4f4;
+  --panel-line: #e2e2e2;
+  --line: #d9d9d9;
 
-  position: relative;
-  padding: clamp(1.5rem, 0.75rem + 4vw, 3.5rem);
-  background: #ffffff;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
   color: var(--body);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  box-shadow: var(--card-shadow);
-  font-size: 0.9375rem;
+  font-size: 0.9rem;
   line-height: 1.5;
-  overflow: hidden;
 }
 
-/* Identity of each kind: an ink bar across the top of an invoice, a gold
-   spine down the left of a quotation. */
-.doc--invoice {
-  border-top: 10px solid var(--ink);
+.inv__page {
+  position: relative;
+  padding: clamp(1.5rem, 0.75rem + 4vw, 3.25rem);
+  background: #ffffff;
+  border: 1px solid var(--line);
+  box-shadow: var(--card-shadow);
 }
 
-.doc--quotation {
-  border-left: 10px solid var(--gold);
+.inv__page + .inv__page {
+  margin-top: var(--space-5);
 }
 
-.doc__header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--space-5);
-  padding-bottom: var(--space-5);
-  border-bottom: 1px solid var(--ink);
-}
-
-.doc--quotation .doc__header {
-  border-bottom: 2px solid var(--gold);
-}
-
-.doc__logo {
+.inv__rule {
   display: block;
-  height: 3.5rem;
-  width: auto;
-  max-width: 14rem;
-  object-fit: contain;
-  object-position: left center;
+  height: 2px;
+  margin-bottom: var(--space-5);
+  background: var(--red);
 }
 
-.doc__issuer-name {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  line-height: 1.2;
+/* Header */
+
+.inv__title {
+  font-size: clamp(2rem, 1.3rem + 3vw, 2.9rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
   color: var(--ink);
-}
-
-.doc__issuer-contact {
-  margin-top: var(--space-3);
-  font-size: 0.8125rem;
-  color: var(--soft);
-}
-
-.doc__title {
-  text-align: right;
-}
-
-.doc__title h1 {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 1.4rem + 2.4vw, 2.75rem);
-  font-weight: 450;
   line-height: 1;
-  letter-spacing: -0.02em;
-  color: var(--ink);
 }
 
-.doc__number {
+.inv__subtitle {
   margin-top: var(--space-2);
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  color: var(--ink);
-}
-
-.doc--quotation .doc__number {
-  color: var(--gold);
-}
-
-.doc__parties {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 16rem);
-  gap: var(--space-6);
-  padding-block: var(--space-6);
-}
-
-.doc__label {
-  margin-bottom: var(--space-2);
-  font-size: 0.8125rem;
-  font-weight: 600;
+  font-size: 1.05rem;
   color: var(--soft);
 }
 
-.doc--quotation .doc__terms .doc__label {
-  color: var(--gold);
+/* Two grey info panels */
+
+.inv__panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: var(--space-5);
+  border: 1px solid var(--panel-line);
+  background: var(--panel);
 }
 
-.doc__client {
-  font-size: 1.0625rem;
-  font-weight: 700;
-  color: var(--ink);
+.inv__panel {
+  padding: var(--space-4) var(--space-5);
 }
 
-.doc__parties p {
+.inv__panel + .inv__panel {
+  border-left: 1px solid var(--panel-line);
+}
+
+.inv__panel p {
   overflow-wrap: anywhere;
 }
 
-.doc__facts {
+.inv__party-name {
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: var(--space-1);
+}
+
+.inv__k {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.inv__panel-title {
+  margin-bottom: var(--space-2);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.inv__details {
   display: grid;
-  align-content: start;
+  gap: 0.2rem;
+}
+
+.inv__details > div {
+  display: flex;
   gap: var(--space-2);
 }
 
-.doc__facts > div {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-4);
-}
-
-.doc__facts dt {
-  font-size: 0.8125rem;
-  color: var(--soft);
-}
-
-.doc__facts dd {
-  font-weight: 600;
+.inv__details dt {
+  font-weight: 700;
   color: var(--ink);
-  text-align: right;
+  white-space: nowrap;
 }
 
-.doc__status {
-  display: inline-block;
-  padding: 0.05rem 0.6rem;
-  border-radius: 999px;
-  background: var(--sand);
-  font-size: 0.8125rem;
+.inv__logo {
+  display: block;
+  height: 2.75rem;
+  width: auto;
+  max-width: 13rem;
+  object-fit: contain;
+  object-position: left center;
+  margin-bottom: var(--space-3);
 }
 
-.doc__status[data-status='paid'],
-.doc__status[data-status='accepted'] {
-  background: #e4efe8;
-  color: #2f6b4a;
+/* Section headings */
+
+.inv__section {
+  margin-top: var(--space-6);
 }
 
-.doc__status[data-status='cancelled'],
-.doc__status[data-status='declined'] {
-  background: #f6e6e4;
-  color: #a3372f;
+.inv__heading {
+  margin-bottom: var(--space-3);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--red);
 }
 
-.doc__subject {
-  margin-bottom: var(--space-5);
-  font-family: var(--font-display);
-  font-size: 1.375rem;
-  line-height: 1.25;
-  color: var(--ink);
+.inv__billto {
+  padding: var(--space-4) var(--space-5);
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
 }
 
-.doc__table {
+.inv__billto p {
+  overflow-wrap: anywhere;
+}
+
+/* Deliverables table */
+
+.inv__table {
   width: 100%;
   border-collapse: collapse;
   font-variant-numeric: tabular-nums;
 }
 
-.doc__table th {
-  padding: 0.6rem 0.75rem;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  text-align: left;
-  white-space: nowrap;
-}
-
-.doc--invoice .doc__table th {
-  background: var(--ink);
+.inv__table thead th {
+  padding: 0.5rem 0.65rem;
+  background: var(--red);
   color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: center;
+  border: 1px solid var(--red-dark);
 }
 
-.doc--quotation .doc__table th {
-  background: var(--sand);
-  color: var(--ink);
-  border-bottom: 2px solid var(--gold);
+.inv__table thead th:nth-child(2) {
+  text-align: center;
 }
 
-.doc__table td {
-  padding: 0.75rem;
-  border-bottom: 1px solid var(--hair);
+.inv__table tbody td {
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--line);
   vertical-align: top;
   overflow-wrap: anywhere;
 }
 
-.doc__table .doc__num {
+.inv__c-no {
+  width: 3rem;
+  text-align: center;
+}
+
+.inv__c-num {
   text-align: right;
   white-space: nowrap;
 }
 
-.doc__amount {
-  font-weight: 600;
+.inv__table tbody td.inv__c-no {
+  text-align: center;
+}
+
+.inv__total-row td {
+  padding: 0.6rem 0.65rem;
+  background: #ececec;
+  border: 1px solid var(--line);
+  font-weight: 700;
   color: var(--ink);
 }
 
-.doc__summary {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 18rem);
-  gap: var(--space-6);
-  padding-top: var(--space-6);
+.inv__total-row td:first-child {
+  text-align: right;
+  letter-spacing: 0.04em;
 }
 
-.doc__terms {
-  display: grid;
-  align-content: start;
-  gap: var(--space-5);
-  font-size: 0.875rem;
+.inv__total-amount {
+  color: var(--red);
+  text-align: right;
 }
 
-.doc__pre {
+/* Discount / tax / paid adjustments under the table */
+
+.inv__adjust {
+  display: grid;
+  gap: 0.25rem;
+  margin-top: var(--space-3);
+  margin-left: auto;
+  width: min(100%, 20rem);
+  font-variant-numeric: tabular-nums;
+}
+
+.inv__adjust > div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.inv__adjust dt {
+  color: var(--soft);
+}
+
+.inv__adjust dd {
+  color: var(--ink);
+}
+
+.inv__adjust-due {
+  margin-top: var(--space-1);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--line);
+  font-weight: 700;
+}
+
+.inv__adjust-due dd {
+  color: var(--red);
+}
+
+/* Amount in words */
+
+.inv__words {
+  padding: var(--space-3) var(--space-4);
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* Banking details table */
+
+.inv__bank {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.inv__bank th,
+.inv__bank td {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+.inv__bank th {
+  width: 38%;
+  background: var(--panel);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.inv__pre {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
 
-.doc__totals {
-  display: grid;
-  align-content: start;
-  gap: var(--space-2);
-  font-variant-numeric: tabular-nums;
-}
-
-.doc__totals > div {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-4);
-  padding-inline: 0.75rem;
-}
-
-.doc__totals dt {
+.inv__notes {
+  margin-top: var(--space-4);
   color: var(--soft);
 }
 
-.doc__totals dd {
-  color: var(--ink);
-  text-align: right;
-}
-
-.doc__totals .doc__total {
-  padding-top: var(--space-2);
-  border-top: 1px solid var(--hair);
-  font-weight: 700;
-}
-
-.doc__totals .doc__total dt {
-  color: var(--ink);
-}
-
-.doc__totals .doc__due {
-  align-items: center;
-  margin-top: var(--space-2);
-  padding: 0.85rem 0.75rem;
-  border-radius: 4px;
-}
-
-.doc__due dd {
-  font-size: 1.1875rem;
-  font-weight: 700;
-}
-
-.doc--invoice .doc__due {
-  background: var(--ink);
-}
-
-.doc--invoice .doc__due dt {
-  color: #c9ccd1;
-}
-
-.doc--invoice .doc__due dd {
-  color: #ffffff;
-}
-
-.doc--quotation .doc__due {
-  border: 2px solid var(--gold);
-}
-
-.doc__accept {
-  margin-top: var(--space-6);
-  font-size: 0.875rem;
-  color: var(--soft);
-}
-
-.doc__footer {
+.inv__footline {
   margin-top: var(--space-7);
   padding-top: var(--space-4);
-  border-top: 1px solid var(--hair);
-  font-size: 0.75rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.8rem;
   color: var(--soft);
   text-align: center;
   overflow-wrap: anywhere;
 }
 
+/* Signature page */
+
+.inv__sign {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-7);
+  margin-top: var(--space-6);
+}
+
+.inv__sign-col {
+  min-width: 0;
+}
+
+.inv__sign-role {
+  margin-bottom: var(--space-5);
+  color: var(--soft);
+}
+
+.inv__sign-mark {
+  display: block;
+  height: 3rem;
+  width: auto;
+  max-width: 11rem;
+  object-fit: contain;
+  object-position: left bottom;
+  margin-bottom: var(--space-1);
+}
+
+.inv__sign-line {
+  margin-top: var(--space-3);
+  overflow-wrap: anywhere;
+}
+
+.inv__footer {
+  margin-top: var(--space-7);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+.inv__web {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.inv__link {
+  margin-top: var(--space-1);
+  font-size: 0.8rem;
+  color: var(--red);
+  overflow-wrap: anywhere;
+}
+
 @media (max-width: 640px) {
-  .doc__title {
-    text-align: left;
-  }
-
-  .doc__parties,
-  .doc__summary {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .billing__actions {
     width: 100%;
   }
@@ -365,8 +397,22 @@
     flex: 1 1 calc(50% - var(--space-2));
   }
 
-  /* Each line becomes a small card so nothing scrolls sideways. */
-  .doc__table thead {
+  .inv__panels {
+    grid-template-columns: 1fr;
+  }
+
+  .inv__panel + .inv__panel {
+    border-left: 0;
+    border-top: 1px solid var(--panel-line);
+  }
+
+  .inv__sign {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  /* Deliverables table becomes stacked cards so nothing scrolls sideways. */
+  .inv__table thead {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -374,53 +420,50 @@
     clip: rect(0 0 0 0);
   }
 
-  .doc__table,
-  .doc__table tbody,
-  .doc__table tr,
-  .doc__table td {
+  .inv__table,
+  .inv__table tbody,
+  .inv__table tfoot,
+  .inv__table tr,
+  .inv__table td {
     display: block;
     width: 100%;
   }
 
-  .doc__table tr {
-    padding-block: var(--space-3);
-    border-bottom: 1px solid var(--hair);
+  .inv__table tbody tr {
+    margin-bottom: var(--space-3);
+    border: 1px solid var(--line);
   }
 
-  .doc__table tbody tr:first-child {
-    border-top: 2px solid var(--ink);
-  }
-
-  .doc--quotation .doc__table tbody tr:first-child {
-    border-top-color: var(--gold);
-  }
-
-  .doc__table td {
+  .inv__table tbody td {
     display: flex;
     justify-content: space-between;
     gap: var(--space-4);
-    padding: 0.15rem 0;
     border: 0;
+    border-bottom: 1px solid var(--panel-line);
+    text-align: right;
   }
 
-  .doc__table td:first-child {
-    display: block;
-    padding-bottom: var(--space-2);
-    font-weight: 600;
-    color: var(--ink);
+  .inv__table tbody td:last-child {
+    border-bottom: 0;
   }
 
-  .doc__table td:not(:first-child)::before {
+  .inv__table tbody td::before {
     content: attr(data-label);
-    color: var(--soft);
+    font-weight: 700;
+    color: var(--ink);
+    text-align: left;
   }
 
-  .doc__totals > div {
-    padding-inline: 0;
+  .inv__table tbody td.inv__c-no {
+    text-align: right;
   }
 
-  .doc__totals .doc__due {
-    padding-inline: 0.75rem;
+  .inv__total-row td:first-child {
+    text-align: left;
+  }
+
+  .inv__bank th {
+    width: 42%;
   }
 }
 
@@ -436,11 +479,24 @@
     max-width: none;
   }
 
-  .doc {
-    border-radius: 0;
+  .inv__page {
+    border: 0;
     box-shadow: none;
-    border-right: 0;
-    border-bottom: 0;
+    padding: 0;
+  }
+
+  .inv__page--sign {
+    margin-top: 0;
+    break-before: page;
+  }
+
+  .inv__rule,
+  .inv__table thead th,
+  .inv__total-row td,
+  .inv__words,
+  .inv__panels,
+  .inv__billto,
+  .inv__bank th {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }

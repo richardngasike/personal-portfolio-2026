@@ -247,6 +247,21 @@ export const RESOURCES: Record<ResourceKey, ResourceDef> = {
         ],
       },
       {
+        title: 'Billing and banking',
+        description: 'Shown on every invoice and quotation. Entered once here, not per document.',
+        fields: [
+          { name: 'invoice_from_address', label: 'Your address (shown as sender)', type: 'textarea', maxLength: 300, help: 'One line per line, e.g. 7 Donholm 00200 / Nairobi, Kenya.' },
+          { name: 'bank_account_name', label: 'Account holder name', type: 'text', maxLength: 200, half: true },
+          { name: 'bank_account_number', label: 'Account number', type: 'text', maxLength: 60, half: true },
+          { name: 'bank_name', label: 'Bank name', type: 'text', maxLength: 120, half: true },
+          { name: 'bank_branch', label: 'Branch', type: 'text', maxLength: 120, half: true },
+          { name: 'bank_address', label: 'Bank address', type: 'text', maxLength: 200 },
+          { name: 'bank_swift', label: 'SWIFT code', type: 'text', maxLength: 40, half: true },
+          { name: 'bank_iban', label: 'IBAN', type: 'text', maxLength: 60, half: true },
+          { name: 'mpesa_details', label: 'M-Pesa details', type: 'text', maxLength: 200, help: 'Optional, e.g. Paybill 123456, Account: your name.' },
+        ],
+      },
+      {
         title: 'Footer',
         fields: [
           { name: 'footer_text', label: 'Footer text', type: 'textarea', maxLength: 300 },

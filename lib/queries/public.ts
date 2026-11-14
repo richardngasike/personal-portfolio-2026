@@ -34,6 +34,15 @@ const EMPTY_SETTINGS: SettingsRow = {
   copyright_holder: 'Richard Ngasike',
   copyright_start_year: null,
   seo_keywords: [],
+  invoice_from_address: '',
+  bank_account_name: '',
+  bank_account_number: '',
+  bank_name: '',
+  bank_branch: '',
+  bank_address: '',
+  bank_iban: '',
+  bank_swift: '',
+  mpesa_details: '',
   updated_at: '',
 };
 

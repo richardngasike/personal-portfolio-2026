@@ -38,13 +38,26 @@ export interface BillingDocument {
 
 // Details of the business issuing the document, read from the profile and
 // website settings so documents always carry the current brand.
+export interface BankingDetails {
+  accountName: string;
+  accountNumber: string;
+  bankName: string;
+  branch: string;
+  bankAddress: string;
+  iban: string;
+  swift: string;
+  mpesa: string;
+}
+
 export interface Issuer {
   name: string;
   email: string;
   phone: string;
   location: string;
+  address: string;
   website: string;
   logoUrl: string | null;
+  banking: BankingDetails;
 }
 
 export const KIND_LABELS: Record<BillingKind, string> = { invoice: 'Invoice', quotation: 'Quotation' };

@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { NextResponse } from 'next/server';
-import { getIssuer, getSharedDocument } from './queries';
+import { getIssuer, getSharedDocument, shareUrl } from './queries';
 import { renderBillingPdf } from './pdf';
 import type { BillingKind } from './types';
 
@@ -11,7 +11,7 @@ export async function billingPdfResponse(kind: BillingKind, year: string, month:
   if (!document) return new NextResponse('Document not found.', { status: 404 });
 
   try {
-    const bytes = await renderBillingPdf(document, await getIssuer());
+    const bytes = await renderBillingPdf(document, await getIssuer(), shareUrl(document.share_path));
     return new NextResponse(Buffer.from(bytes), {
       status: 200,
       headers: {
