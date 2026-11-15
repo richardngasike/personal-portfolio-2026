@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import type { IconType } from 'react-icons';
 import {
   FiAward,
+  FiBookOpen,
   FiBriefcase,
   FiExternalLink,
   FiFileText,
@@ -81,6 +82,7 @@ export function AdminShell({ userName, unreadMessages, children }: AdminShellPro
         { href: '/admin/gallery', label: 'Creative gallery', icon: FiImage },
         { href: '/admin/gallery-categories', label: 'Gallery categories', icon: FiTag },
         { href: '/admin/documents', label: 'CV and documents', icon: FiFileText },
+        { href: '/admin/posts', label: 'Blog', icon: FiBookOpen },
       ],
     },
     {

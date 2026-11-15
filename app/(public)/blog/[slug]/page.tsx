@@ -82,9 +82,9 @@ export default async function PostPage({ params }: PostPageProps) {
         {post.coverUrl ? (
           <figure className="post__cover">
             <div className="container container--narrow">
-              <div className="post__cover-frame">
-                <Image src={post.coverUrl} alt={post.title} fill sizes="(max-width: 760px) 100vw, 720px" priority />
-              </div>
+              {/* The full image at its natural shape, never cropped. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="post__cover-img" src={post.coverUrl} alt={post.title} />
             </div>
           </figure>
         ) : null}
