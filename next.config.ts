@@ -42,9 +42,14 @@ const supabaseOrigin = (() => {
 // or the browser cannot reach it.
 const allowInsecureUpgrade = !supabaseOrigin || supabaseOrigin.startsWith('https://');
 
+// Next.js dev mode (Fast Refresh, source maps) needs eval(); production React
+// never uses it, so 'unsafe-eval' is granted only while developing.
+const isDev = process.env.NODE_ENV === 'development';
+const scriptSrc = isDev ? `script-src 'self' 'unsafe-inline' 'unsafe-eval'` : `script-src 'self' 'unsafe-inline'`;
+
 const csp = [
   `default-src 'self'`,
-  `script-src 'self' 'unsafe-inline'`,
+  scriptSrc,
   `style-src 'self' 'unsafe-inline'`,
   `img-src 'self' blob: data:${supabaseOrigin ? ` ${supabaseOrigin}` : ''}`,
   `font-src 'self'`,
