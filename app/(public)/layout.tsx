@@ -4,8 +4,13 @@ import '@/styles/components/buttons.css';
 import '@/styles/components/navbar.css';
 import '@/styles/components/footer.css';
 import '@/styles/components/sections.css';
+import '@/styles/components/cookie.css';
+import '@/styles/components/loading.css';
 import { Navbar } from '@/components/navigation/Navbar';
 import { Footer } from '@/components/navigation/Footer';
+import { CookieBanner } from '@/components/analytics/CookieBanner';
+import { Analytics } from '@/components/analytics/Analytics';
+import { RouteProgress } from '@/components/shared/RouteProgress';
 import { JsonLd } from '@/components/shared/JsonLd';
 import { SITE_URL } from '@/lib/env';
 import {
@@ -73,12 +78,15 @@ export default async function PublicLayout({ children }: { children: ReactNode }
 
   return (
     <div className="site">
+      <RouteProgress />
       <a className="skip-link" href="#main-content">
         Skip to content
       </a>
       <Navbar wordmark={wordmark} logoUrl={logoUrl} />
       <main id="main-content">{children}</main>
       <Footer settings={settings} profile={profile} socialLinks={socialLinks} logoUrl={logoUrl} />
+      <CookieBanner />
+      <Analytics />
       <JsonLd data={person} />
       <JsonLd
         data={{

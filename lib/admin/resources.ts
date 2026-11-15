@@ -272,6 +272,19 @@ export const RESOURCES: Record<ResourceKey, ResourceDef> = {
           { name: 'copyright_start_year', label: 'Copyright start year', type: 'number', min: 1990, max: 2100, half: true, help: 'The current year is added automatically.' },
         ],
       },
+      {
+        title: 'Security',
+        description: 'Controls account recovery for the admin panel.',
+        fields: [
+          {
+            name: 'admin_reset_email',
+            label: 'Recovery email',
+            type: 'email',
+            maxLength: 254,
+            help: 'The only address that can receive an admin password-reset link. Must be an inbox you control and match your Supabase login email.',
+          },
+        ],
+      },
     ],
   },
 

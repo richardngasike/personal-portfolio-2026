@@ -5,6 +5,9 @@ import '@/styles/admin/admin-forms.css';
 import '@/styles/admin/admin-dashboard.css';
 import '@/styles/admin/admin-projects.css';
 import '@/styles/admin/admin-gallery.css';
+import '@/styles/admin/admin-analytics.css';
+import '@/styles/components/loading.css';
+import { RouteProgress } from '@/components/shared/RouteProgress';
 
 export const metadata: Metadata = {
   title: { default: 'Admin', template: '%s | Admin' },
@@ -12,5 +15,10 @@ export const metadata: Metadata = {
 };
 
 export default function AdminRootLayout({ children }: { children: ReactNode }) {
-  return <div className="admin-root">{children}</div>;
+  return (
+    <div className="admin-root">
+      <RouteProgress />
+      {children}
+    </div>
+  );
 }

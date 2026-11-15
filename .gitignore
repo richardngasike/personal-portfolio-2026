@@ -18,3 +18,9 @@ billing.tgz
 invoice-redesign.tgz
 invoice-pagination.tgz
 blog.tgz
+.env.example
+.env
+.env.*
+!.env.example
+# local sync bundles
+*.tgz

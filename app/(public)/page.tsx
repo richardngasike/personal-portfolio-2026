@@ -7,6 +7,7 @@ import '@/styles/pages/home.css';
 import { ProjectCard } from '@/components/projects/ProjectCard';
 import { ProjectFeature } from '@/components/projects/ProjectFeature';
 import { ContactCta } from '@/components/shared/ContactCta';
+import { HeroAccentLazy } from '@/components/hero/HeroAccentLazy';
 import { formatDateRange } from '@/lib/utils/format';
 import {
   getExperiences,
@@ -61,6 +62,7 @@ export default async function HomePage() {
   return (
     <>
       <section className="hero">
+        <HeroAccentLazy />
         <div className="container">
           <div className="hero__inner">
             <div className="hero__content">

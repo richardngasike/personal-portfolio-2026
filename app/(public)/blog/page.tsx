@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
+import { BlogFeed } from '@/components/blog/BlogFeed';
 import '@/styles/pages/blog.css';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { ContactCta } from '@/components/shared/ContactCta';
@@ -32,36 +31,7 @@ export default async function BlogPage() {
       <section className="section section--flush-top">
         <div className="container">
           {posts.length > 0 ? (
-            <ul className="post-grid">
-              {posts.map((post, index) => (
-                <li key={post.id}>
-                  <article className="post-card">
-                    <Link href={`/blog/${post.slug}`} className="post-card__media" aria-hidden="true" tabIndex={-1}>
-                      {post.coverUrl ? (
-                        <Image
-                          src={post.coverUrl}
-                          alt={post.title}
-                          fill
-                          sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 360px"
-                          priority={index < 2}
-                        />
-                      ) : (
-                        <span className="post-card__placeholder">{post.title}</span>
-                      )}
-                    </Link>
-                    <div className="post-card__body">
-                      <p className="post-card__date">
-                        <time dateTime={post.publishedAt}>{formatLongDate(post.publishedAt)}</time>
-                      </p>
-                      <h2 className="post-card__title">
-                        <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-                      </h2>
-                      {post.excerpt ? <p className="post-card__excerpt">{post.excerpt}</p> : null}
-                    </div>
-                  </article>
-                </li>
-              ))}
-            </ul>
+            <BlogFeed posts={posts} />
           ) : (
             <p className="empty-state">Posts will appear here once they are published.</p>
           )}

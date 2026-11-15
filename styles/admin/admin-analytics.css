@@ -1,0 +1,261 @@
+/* Admin analytics dashboard: trend chart, ranked lists, device split. */
+
+.stats--tiles {
+  margin-bottom: var(--space-5);
+}
+
+.stat--static {
+  cursor: default;
+}
+
+.stat--static:hover {
+  border-color: var(--admin-border);
+}
+
+.stat__value--sm {
+  font-size: 1.5rem;
+}
+
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+}
+
+@media (max-width: 760px) {
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Trend chart */
+.chart {
+  margin: 0;
+}
+
+.chart__svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  color: var(--gold);
+}
+
+.chart__bar {
+  fill: var(--gold);
+  opacity: 0.85;
+}
+
+.chart__line {
+  stroke: var(--admin-text);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  opacity: 0.7;
+}
+
+.chart__axis {
+  stroke: var(--admin-border);
+  stroke-width: 1;
+}
+
+.chart__grid {
+  stroke: var(--admin-border);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+}
+
+.chart__gridlabel,
+.chart__xlabel {
+  fill: var(--admin-muted);
+  font-size: 11px;
+  font-family: var(--font-mono);
+}
+
+.chart__legend {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--admin-muted);
+}
+
+.chart__key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.chart__key::before {
+  content: '';
+  width: 14px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.chart__key--bar::before {
+  background: var(--gold);
+}
+
+.chart__key--line::before {
+  height: 2px;
+  background: var(--admin-text);
+  opacity: 0.7;
+}
+
+/* Ranked lists */
+.rank {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-1);
+}
+
+.rank__row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0.5rem 0.65rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.rank__bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: -1;
+  background: var(--gold-wash, rgba(201, 160, 69, 0.14));
+  border-radius: var(--radius);
+  min-width: 2px;
+}
+
+.rank__label {
+  font-size: var(--text-sm);
+  color: var(--admin-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rank__count {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--admin-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.rank__empty {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--admin-muted);
+}
+
+/* Device split */
+.device__bar {
+  display: flex;
+  height: 12px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--admin-bg);
+}
+
+.device__seg {
+  height: 100%;
+}
+
+.device__seg--0 {
+  background: var(--gold);
+}
+
+.device__seg--1 {
+  background: var(--ink-500);
+}
+
+.device__seg--2 {
+  background: var(--admin-border);
+}
+
+.device__legend {
+  list-style: none;
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.device__legend li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+}
+
+.device__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.device__name {
+  text-transform: capitalize;
+  color: var(--admin-text);
+}
+
+.device__pct {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--admin-muted);
+}
+
+/* Security / account forms */
+.security-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 32rem);
+  gap: var(--space-5);
+}
+
+.stacked-form {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.stacked-form__actions {
+  margin-top: var(--space-2);
+}
+
+.form-alert {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius);
+  font-size: var(--text-sm);
+}
+
+.form-alert--error {
+  background: var(--danger-wash);
+  color: var(--danger);
+}
+
+.form-alert--success {
+  background: var(--success-wash);
+  color: var(--success);
+}
+
+.security-note {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--admin-muted);
+}
+
+.security-note code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--admin-bg);
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+  color: var(--admin-text);
+}

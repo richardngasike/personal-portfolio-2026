@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import type { IconType } from 'react-icons';
 import {
   FiAward,
+  FiBarChart2,
   FiBookOpen,
   FiBriefcase,
   FiExternalLink,
@@ -20,6 +21,7 @@ import {
   FiLogOut,
   FiMenu,
   FiSettings,
+  FiShield,
   FiTag,
   FiTool,
   FiUser,
@@ -59,6 +61,7 @@ export function AdminShell({ userName, unreadMessages, children }: AdminShellPro
       title: 'Overview',
       items: [
         { href: '/admin', label: 'Dashboard', icon: FiGrid },
+        { href: '/admin/analytics', label: 'Analytics', icon: FiBarChart2 },
         { href: '/admin/messages', label: 'Messages', icon: FiInbox, badge: unreadMessages },
         { href: '/admin/billing', label: 'Invoices & quotes', icon: FiFileText },
       ],
@@ -90,6 +93,7 @@ export function AdminShell({ userName, unreadMessages, children }: AdminShellPro
       items: [
         { href: '/admin/social-links', label: 'Social links', icon: FiLink },
         { href: '/admin/settings', label: 'Website settings', icon: FiSettings },
+        { href: '/admin/security', label: 'Security', icon: FiShield },
       ],
     },
   ];

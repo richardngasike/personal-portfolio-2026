@@ -1,0 +1,96 @@
+/* Top route-progress bar */
+.routebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  z-index: 100;
+  background: var(--accent-strong, #b08a35);
+  box-shadow: 0 0 8px rgba(176, 138, 53, 0.5);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.routebar--loading {
+  opacity: 1;
+  width: 92%;
+  transition: width 9s cubic-bezier(0.1, 0.7, 0.1, 1);
+}
+
+.routebar--done {
+  opacity: 1;
+  width: 100%;
+  transition: width 180ms ease, opacity 300ms ease 160ms;
+  opacity: 0;
+}
+
+.routebar--idle {
+  width: 0;
+  opacity: 0;
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .routebar--loading {
+    transition: none;
+    width: 40%;
+  }
+}
+
+/* Lightweight page skeleton for route-level loading states */
+.skeleton-page {
+  max-width: var(--container, 76rem);
+  margin: 0 auto;
+  padding: var(--section-y, 5rem) var(--gutter, 2rem);
+}
+
+.skeleton-line,
+.skeleton-block {
+  background: linear-gradient(90deg, var(--surface-2) 25%, var(--border) 37%, var(--surface-2) 63%);
+  background-size: 400% 100%;
+  border-radius: var(--radius);
+  animation: skeleton-shimmer 1.4s ease infinite;
+}
+
+.skeleton-line {
+  height: 1rem;
+  margin-bottom: 0.9rem;
+}
+
+.skeleton-line--title {
+  height: 2.4rem;
+  width: 55%;
+  margin-bottom: 1.6rem;
+}
+
+.skeleton-line--short {
+  width: 40%;
+}
+
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: var(--space-5, 1.5rem);
+  margin-top: var(--space-6, 2rem);
+}
+
+.skeleton-block {
+  height: 12rem;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-line,
+  .skeleton-block {
+    animation: none;
+  }
+}
